@@ -87,7 +87,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () => _showDatePicker,
                     child: Text(
                       'Choose Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
