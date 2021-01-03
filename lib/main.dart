@@ -59,18 +59,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Transaction> _userTransactionList = [
-    Transaction(
-      id: '1',
-      title: 'First',
-      amount: 1200,
-      timeStamp: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Second',
-      amount: 1200,
-      timeStamp: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: '1',
+    //   title: 'First',
+    //   amount: 1200,
+    //   timeStamp: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '2',
+    //   title: 'Second',
+    //   amount: 1200,
+    //   timeStamp: DateTime.now(),
+    // ),
   ];
 
   List<Transaction> get _recentTransaction {
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            //Chart(_recentTransaction),
+            Chart(_recentTransaction),
             TransactionList(_userTransactionList),
           ],
         ),

@@ -16,10 +16,10 @@ class Chart extends StatelessWidget {
       );
       int total = 0;
       for (var i = 0; i < _transactionList.length; i++) {
-        if (_transactionList[index].timeStamp.day == day.day &&
-            _transactionList[index].timeStamp.month == day.month &&
-            _transactionList[index].timeStamp.year == day.year) {
-          total += _transactionList[index].amount;
+        if (_transactionList[i].timeStamp.day == day.day &&
+            _transactionList[i].timeStamp.month == day.month &&
+            _transactionList[i].timeStamp.year == day.year) {
+          total += _transactionList[i].amount;
         }
       }
       return {
