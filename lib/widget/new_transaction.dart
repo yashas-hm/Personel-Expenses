@@ -40,13 +40,12 @@ class _NewTransactionState extends State<NewTransaction> {
       firstDate: DateTime(2018),
       lastDate: DateTime.now(),
     ).then((value) {
-      if (value != null) {
-        setState(() {
-          _datePicked = value;
-        });
-      } else {
+      if (value == null) {
         return;
       }
+      setState(() {
+        _datePicked = value;
+      });
     });
   }
 
@@ -87,7 +86,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
                   ),
                   FlatButton(
-                    onPressed: () => _showDatePicker,
+                    onPressed: () => _showDatePicker(),
                     child: Text(
                       'Choose Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
