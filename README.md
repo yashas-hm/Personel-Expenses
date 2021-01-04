@@ -1,6 +1,7 @@
-# untitled
+# Personal Expenses App
 
 A new Flutter project.
+Stores your weekly expenses and shows a bar chart with percentage of expense in a week
 
 ## Getting Started
 
