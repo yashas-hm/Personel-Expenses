@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -30,19 +34,33 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   void _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2018),
-      lastDate: DateTime.now(),
-    ).then((value) {
-      if (value == null) {
-        return;
-      }
-      setState(() {
-        _datePicked = value;
-      });
-    });
+    Platform.isIOS
+        ? CupertinoDatePicker(
+            initialDateTime: DateTime.now(),
+            minimumYear: 2018,
+            maximumDate: DateTime.now(),
+            onDateTimeChanged: (value) => {
+              if (value != null)
+                {
+                  setState(() {
+                    _datePicked = value;
+                  })
+                }
+            },
+          )
+        : showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2018),
+            lastDate: DateTime.now(),
+          ).then((value) {
+            if (value == null) {
+              return;
+            }
+            setState(() {
+              _datePicked = value;
+            });
+          });
   }
 
   @override
@@ -85,6 +103,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         _datePicked == null
                             ? 'No Date Chosen'
                             : 'Picked Date : ${DateFormat.yMd().format(_datePicked)}',
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
                     FlatButton(
