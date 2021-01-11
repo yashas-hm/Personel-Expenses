@@ -149,6 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
               appBar.preferredSize.height -
               MediaQuery.of(context).padding.top) *
           0.65,
+      alignment: Alignment.center,
       child: TransactionList(_userTransactionList, _deleteTransaction),
     );
 
@@ -183,7 +184,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            if (!isLandscape) listWidget,
+            if (!isLandscape)
+              listWidget,
             if (isLandscape)
               _showChart
                   ? Container(

@@ -15,6 +15,7 @@ class TransactionList extends StatelessWidget {
         ? LayoutBuilder(
             builder: (ctx, constraints) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'No Transactions added yet',
@@ -26,6 +27,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   Container(
                     height: constraints.maxHeight * 0.5,
+                    //alignment: Alignment.center,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,

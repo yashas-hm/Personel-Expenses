@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -78,22 +77,35 @@ class _NewTransactionState extends State<NewTransaction> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                ),
-                controller: _textController,
-                keyboardType: TextInputType.text,
-                onSubmitted: (_) => _submit(),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Amount',
-                ),
-                controller: _amountController,
-                keyboardType: TextInputType.number,
-                onSubmitted: (_) => _submit(),
-              ),
+              Platform.isIOS
+                  ? CupertinoTextField(
+                      onSubmitted: (_) => _submit(),
+                      placeholder: "Title",
+                      controller: _textController,
+                      keyboardType: TextInputType.text,
+                    )
+                  : TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Title',
+                      ),
+                      controller: _textController,
+                      keyboardType: TextInputType.text,
+                      onSubmitted: (_) => _submit(),
+                    ),
+              Platform.isIOS
+                  ? CupertinoTextField(
+                      onSubmitted: (_) => _submit(),
+                      controller: _amountController,
+                      placeholder: "Amount",
+                    )
+                  : TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                      ),
+                      controller: _amountController,
+                      keyboardType: TextInputType.number,
+                      onSubmitted: (_) => _submit(),
+                    ),
               Container(
                 height: 70,
                 child: Row(
@@ -106,23 +118,36 @@ class _NewTransactionState extends State<NewTransaction> {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () => _showDatePicker(),
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      textColor: Theme.of(context).primaryColor,
-                    )
+                    Platform.isIOS
+                        ? CupertinoButton(
+                            child: Text(
+                              'Choose Date',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () => _showDatePicker(),
+                          )
+                        : FlatButton(
+                            onPressed: () => _showDatePicker(),
+                            child: Text(
+                              'Choose Date',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            textColor: Theme.of(context).primaryColor,
+                          )
                   ],
                 ),
               ),
-              RaisedButton(
-                onPressed: _submit,
-                child: Text('Add Transaction'),
-                color: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).textTheme.button.color,
-              ),
+              Platform.isIOS
+                  ? CupertinoButton.filled(
+                      child: Text('Add Transaction'),
+                      onPressed: _submit,
+                    )
+                  : RaisedButton(
+                      onPressed: _submit,
+                      child: Text('Add Transaction'),
+                      color: Theme.of(context).primaryColor,
+                      textColor: Theme.of(context).textTheme.button.color,
+                    ),
             ],
           ),
         ),
