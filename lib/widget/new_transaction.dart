@@ -120,7 +120,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
                     Platform.isIOS
                         ? CupertinoButton(
-                            child: Text(
+                            child: const Text(
                               'Choose Date',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -128,7 +128,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           )
                         : FlatButton(
                             onPressed: () => _showDatePicker(),
-                            child: Text(
+                            child: const Text(
                               'Choose Date',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -139,12 +139,12 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               Platform.isIOS
                   ? CupertinoButton.filled(
-                      child: Text('Add Transaction'),
+                      child: const Text('Add Transaction'),
                       onPressed: _submit,
                     )
                   : RaisedButton(
                       onPressed: _submit,
-                      child: Text('Add Transaction'),
+                      child: const Text('Add Transaction'),
                       color: Theme.of(context).primaryColor,
                       textColor: Theme.of(context).textTheme.button.color,
                     ),

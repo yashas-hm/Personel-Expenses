@@ -22,7 +22,7 @@ class TransactionList extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
@@ -41,7 +41,7 @@ class TransactionList extends StatelessWidget {
             itemBuilder: (ctx, index) {
               return Card(
                 elevation: 5,
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 5,
                 ),
@@ -49,7 +49,7 @@ class TransactionList extends StatelessWidget {
                   leading: CircleAvatar(
                     radius: 30,
                     child: Padding(
-                      padding: EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(6),
                       child: FittedBox(
                         child: Text('₹${_userTransactionList[index].amount}'),
                       ),
@@ -65,14 +65,14 @@ class TransactionList extends StatelessWidget {
                   ),
                   trailing: MediaQuery.of(context).size.width >= 360
                       ? FlatButton.icon(
-                          icon: Icon(Icons.delete),
-                          label: Text("Delete"),
+                          icon: const Icon(Icons.delete),
+                          label: const Text("Delete"),
                           onPressed: () => _deleteTransaction(
                               _userTransactionList[index].id),
                           textColor: Theme.of(context).errorColor,
                         )
                       : IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _deleteTransaction(
                               _userTransactionList[index].id),
                           color: Theme.of(context).errorColor,

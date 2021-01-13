@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('Personal Expenses'),
             actions: <Widget>[
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     FittedBox(
                       child: Text("Show Chart",style: Theme.of(context).textTheme.headline6,),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Switch.adaptive(
@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
             floatingActionButton: Platform.isIOS
                 ? Container()
                 : FloatingActionButton(
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
