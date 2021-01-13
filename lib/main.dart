@@ -172,6 +172,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     FittedBox(
                       child: Text("Show Chart",style: Theme.of(context).textTheme.headline6,),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Switch.adaptive(
                       activeColor: Theme.of(context).accentColor,
                       value: _showChart,
@@ -200,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: (MediaQuery.of(context).size.height -
                               appBar.preferredSize.height -
                               MediaQuery.of(context).padding.top) *
-                          0.3,
+                          0.6,
                       child: Chart(_recentTransaction),
                     )
                   : listWidget,
