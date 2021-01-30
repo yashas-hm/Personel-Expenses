@@ -116,11 +116,65 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = Platform.isIOS
+  List<Widget> _buildLandscapeContent(AppBar appBar, Widget listWidget) {
+    return [
+      Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        height: (MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top) *
+            0.05,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            FittedBox(
+              child: Text(
+                "Show Chart",
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Switch.adaptive(
+              activeColor: Theme.of(context).accentColor,
+              value: _showChart,
+              onChanged: (val) {
+                setState(() {
+                  _showChart = val;
+                });
+              },
+            )
+          ],
+        ),
+      ),
+      _showChart
+          ? Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.6,
+              child: Chart(_recentTransaction),
+            )
+          : listWidget
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(AppBar appBar, Widget listWidget) {
+    return [
+      Container(
+        height: (MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top) *
+            0.3,
+        child: Chart(_recentTransaction),
+      ),
+      listWidget
+    ];
+  }
+
+  Widget _buildAppbar() {
+    return Platform.isIOS
         ? CupertinoNavigationBar(
             middle: Text('Personal Expenses'),
             trailing: Row(
@@ -144,6 +198,15 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    final PreferredSizeWidget appBar = _buildAppbar();
+
     final listWidget = Container(
       height: (MediaQuery.of(context).size.height -
               appBar.preferredSize.height -
@@ -159,54 +222,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            if (isLandscape)
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.05,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    FittedBox(
-                      child: Text("Show Chart",style: Theme.of(context).textTheme.headline6,),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Switch.adaptive(
-                      activeColor: Theme.of(context).accentColor,
-                      value: _showChart,
-                      onChanged: (val) {
-                        setState(() {
-                          _showChart = val;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
-            if (!isLandscape)
-              Container(
-                height: (MediaQuery.of(context).size.height -
-                    appBar.preferredSize.height -
-                    MediaQuery.of(context).padding.top) *
-                    0.3,
-                child: Chart(_recentTransaction),
-              ),
-            if (!isLandscape)
-              listWidget,
-            if (isLandscape)
-              _showChart
-                  ? Container(
-                      height: (MediaQuery.of(context).size.height -
-                              appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.6,
-                      child: Chart(_recentTransaction),
-                    )
-                  : listWidget,
+            if (isLandscape) ..._buildLandscapeContent(appBar, listWidget),
+            if (!isLandscape) ..._buildPortraitContent(appBar, listWidget),
           ],
         ),
       ),
